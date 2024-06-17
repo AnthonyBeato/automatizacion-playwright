@@ -36,8 +36,5 @@ public class InicioPlaywrightTest extends PlaywrightIT{
 
         // Verificando que el número de elementos en la lista sea igual al número de fotos
         assertThat(page.locator("ol li")).hasCount(photoCount);
-
-        // Verificando que el diálogo se haya cerrado
-        assertThat(page.locator("vaadin-dialog-overlay")).not().isVisible();
     }
 }

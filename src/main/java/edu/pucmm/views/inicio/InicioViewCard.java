@@ -26,7 +26,6 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Width;
 
 public class InicioViewCard extends ListItem {
 
-    //TODO: agregar los demas parametros para un view card
     public InicioViewCard(String title, String url, String subtitle, String description) {
         addClassNames(Background.CONTRAST_5, Display.FLEX, FlexDirection.COLUMN, AlignItems.START, Padding.MEDIUM,
                 BorderRadius.LARGE);
@@ -40,19 +39,23 @@ public class InicioViewCard extends ListItem {
         image.setWidth("100%");
         image.setSrc(url);
         image.setAlt(title);
+        image.getElement().setAttribute("data-testid", "image-" + title);
 
         div.add(image);
 
         Span header = new Span();
         header.addClassNames(FontSize.XLARGE, FontWeight.SEMIBOLD);
         header.setText(title);
+        header.getElement().setAttribute("data-testid", "header-" + title);
 
         Span subtitleSpan = new Span();
         subtitleSpan.addClassNames(FontSize.SMALL, TextColor.SECONDARY);
         subtitleSpan.setText(subtitle);
+        subtitleSpan.getElement().setAttribute("data-testid", "subtitle-" + title);
 
         Paragraph descriptionParagraph = new Paragraph(description);
         descriptionParagraph.addClassName(Margin.Vertical.MEDIUM);
+        descriptionParagraph.getElement().setAttribute("data-testid", "description-" + title);
 
         Span badge = new Span();
         badge.getElement().setAttribute("theme", "badge");
@@ -64,10 +67,12 @@ public class InicioViewCard extends ListItem {
         dialogLayout.setAlignItems(FlexComponent.Alignment.CENTER);
         Span dialogTitle = new Span(title);
         dialogTitle.addClassName(FontSize.XXLARGE);
+        dialogTitle.getElement().setAttribute("data-testid", "dialog-title-" + title);
         Image dialogImage = new Image(url, title);
         dialogImage.setWidth("100%");
         Button closeButton = new Button("Cerrar", e -> dialog.close());
         closeButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        closeButton.getElement().setAttribute("data-testid", "close-button");
         dialogLayout.add(dialogTitle, dialogImage, closeButton);
         dialog.add(dialogLayout);
 
@@ -75,6 +80,5 @@ public class InicioViewCard extends ListItem {
         div.addClickListener(e -> dialog.open());
 
         add(div, header, subtitleSpan, descriptionParagraph, badge);
-
     }
 }
